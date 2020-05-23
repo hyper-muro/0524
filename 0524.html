@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+  <meta charset="UTF-8">
+</head>
 <body>
   <script>
+    class Myclass {
+      constructor(arg1, arg2) {
+        this.props1 = arg1;
+        this.props2 = arg2;
+      }
+
+      method1() {
+        console.log(this.props1, this.props2);
+      }
+
+      //下記の書き方はエラー
+      //method1 : () => { }
+      //method1 : function() { }
+      //オブジェクトのメソッド定義のように key: value の形で定義できない。
+    }
     
+    //親クラスのプロパティを継承し、かつプロパティを一つ追加
+    class English extends Myclass {
+      constructor(arg3, arg4) {
+        super(arg3, arg4);
+        this.props3 = 'from Japan';
+      }
+    }
+
+    const english = new English('Hello', 'world!');
+
+    //プロパティの追加無しで、メソッドを一つ追加
+    class French extends Myclass {
+      method2() {
+        this.method1();
+        console.log('from Osaka');
+      }
+
+      //省略できる物……？
+      //constructorが省略できるということでしょうか？
+    }
+
+
+    const french = new French('Bonjour', 'le monde!');
+
+    english.method1();
+    console.log(english.props3);
+    french.method2();
   </script>
 </body>
 </html>
